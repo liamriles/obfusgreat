@@ -1,11 +1,13 @@
 # Obfusgreat
 
-Obfusgreat is a simple Python CLI tool designed for obfuscating strings using predefined substitution rules defined in a method file.
+Obfusgreat is a Python-based command-line tool designed to obfuscate strings using substitution rules defined in a JSON method file. 
 
 ## Installation
 Clone this repository:
+```bash
 git clone https://github.com/yourusername/obfusgreat.git
 cd obfusgreat
+
 
 ## Usage
 Run the tool with the following command:
@@ -15,20 +17,31 @@ python obfusgreat.py -m [method_file] -c "[command_to_obfuscate]"
 - `-m, --method`: Specifies the method file that contains the substitution rules.
 - `-c, --command`: Specifies the string that needs to be obfuscated.
 
-### Example
-Create a method file named `linux` with the following content:
-';' = '${LS_COLORS:10:1}'
-'ls' = '"l"s'
-' ' = '%09'
+Example
+Create a method JSON file named methods.json with the following content:
 
-Run the tool:
-python obfusgreat.py -m linux -c "ls flag.txt;"
+```json
+{
+  " ": "+",
+  ";": "${LS_COLORS:10:1}",
+  "/": "${PATH:0:1}",
+  "\\": "$env:HOMEPATH[0]",
+  "`": "$IFS",
+  "ls": "{ls,-la}",
+  "echo": "printenv",
+  "\"": "${IFS:0:1}",
+  "'": "${IFS:0:1}",
+  "$@": "`",
+  "^": "`",
+  "\n": "%0a",
+  "\t": "%09",
+  "CMD": "echo %HOMEPATH:~6,-11%",
+  "PS": "Get-ChildItem Env:"
+}
+```
+
+## Run the tool:
+python obfusgreat.py -m linux -c "cat /flag.txt"
+
 Output:
-"l"s%09flag.txt${LS_COLORS:10:1}
-
-
-## Creating Method Files
-Method files should contain one substitution rule per line in the format:
-'character_to_replace' = 'replacement_string'
-
-Ensure each character and replacement is enclosed in single quotes and separated by an equals sign.
+'c'a't'%09${PATH:0:1}flag.txt
