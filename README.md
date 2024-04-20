@@ -5,7 +5,7 @@ Obfusgreat is a Python-based command-line tool designed to obfuscate strings usi
 ## Installation
 Clone this repository:
 ```bash
-git clone https://github.com/yourusername/obfusgreat.git
+git clone https://github.com/liamriles/obfusgreat.git
 cd obfusgreat
 ```
 
