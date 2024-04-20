@@ -29,4 +29,6 @@ Output:
 
 ## Creating Method Files
 Method files should contain one substitution rule per line in the format:
+'character_to_replace' = 'replacement_string'
+
 Ensure each character and replacement is enclosed in single quotes and separated by an equals sign.
